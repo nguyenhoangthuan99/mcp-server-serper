@@ -160,7 +160,13 @@ export class SerperClient implements ISerperClient {
           `Serper API error: ${response.status} ${response.statusText} - ${errorText}`
         );
       }
-      const result = (await response.json()) as IScrapeResult;
+      const json = await response.json();
+      const result = json as IScrapeResult;
+      if(result.text?.length > 32000) {
+         throw new Error(
+          `Serper API error: Scraped text exceeds 32,000 characters limit`
+        );
+      }
       return result;
     } catch (error) {
       console.error(error);
