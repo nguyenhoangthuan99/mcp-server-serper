@@ -162,9 +162,9 @@ export class SerperClient implements ISerperClient {
       }
       const json = await response.json();
       const result = json as IScrapeResult;
-      if(result.text?.length > 64000) {
+      if(result.text?.length > 32000) {
          throw new Error(
-          `Serper API error: Scraped text exceeds 64,000 characters limit. Scraping this page has failed, please use search and find another source to scrape.`
+          `Serper API error: Scraped text exceeds 32,000 characters limit. Scraping this page has failed, please use search and find another source to scrape.`
         );
       }
       return result;
