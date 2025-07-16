@@ -128,7 +128,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
         description: "Alternative terms as comma-separated string (e.g., 'tutorial,guide,course', 'documentation,manual')"
       }
     },
-    required: ["q", "gl", "hl"],
+    required: ["q"], // , "gl", "hl"
   };
 
   // Return list of tools with input schemas
@@ -194,7 +194,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         or
       } = request.params.arguments || {};
 
-      if (!q || !gl || !hl) {
+      if (!q ) { //|| !gl || !hl
         throw new Error(
           "Search query and region code and language are required"
         );
