@@ -135,21 +135,21 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
   return {
     tools: [
       {
-        name: "google_search",
+        name: "web_search",
         description:
           "Tool to perform web searches via Serper API and retrieve rich results. It is able to retrieve organic search results, people also ask, related searches, and knowledge graph.",
         inputSchema: searchInputSchema,
       },
       {
-        name: "scrape",
+        name: "visit_tool",
         description:
-          "Tool to scrape a webpage and retrieve the text and, optionally, the markdown content. It will retrieve also the JSON-LD metadata and the head metadata.",
+          "Tool to allow AI model to visit and read a webpage and retrieve the text and, optionally, the markdown content. It will retrieve also the JSON-LD metadata and the head metadata.",
         inputSchema: {
           type: "object",
           properties: {
             url: {
               type: "string",
-              description: "The URL of the webpage to scrape.",
+              description: "The URL of the webpage to visit.",
             },
             includeMarkdown: {
               type: "boolean",
@@ -170,7 +170,7 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
  */
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   switch (request.params.name) {
-    case "google_search": {
+    case "web_search": {
       const {
         q,
         gl,
@@ -236,7 +236,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
     }
 
-    case "scrape": {
+    case "visit_tool": {
       const url = request.params.arguments?.url as string;
       const includeMarkdown = request.params.arguments
         ?.includeMarkdown as boolean;
